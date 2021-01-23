@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/backButton"
+        android:icon="@drawable/arrow_back_24px"
+        android:title="back"/>
+    <item
+        android:id="@+id/feedButton"
+        android:icon="@drawable/fastfood_24px"
+        android:title="feed"/>
+    <item
+        android:id="@+id/dummy"
+        android:icon="@drawable/check_24px"
+        android:title="dummy"/>
+</menu>
