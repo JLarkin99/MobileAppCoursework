@@ -6,8 +6,11 @@ import androidx.appcompat.widget.SearchView;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,18 @@ public class cookActivityMain extends AppCompatActivity {
         
         ListView listView = findViewById(R.id.cookSearchBar);
         List<String> cookList = new ArrayList<>();
+        listView.setClickable(true);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // When clicked perform some action...
+                Toast.makeText(cookActivityMain.this,"ListView: " + parent.toString() + "\n" +
+                                "View: " + view.toString() + "\n" +
+                                "position: " + String.valueOf(position) + "\n" +
+                                "id: " + String.valueOf(id),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
         //prototype, change later
         cookList.add("Spaghetti");
         cookList.add("burger");
@@ -55,4 +70,8 @@ public class cookActivityMain extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
 
     }
+
+
+
+
 }
