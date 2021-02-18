@@ -3,6 +3,7 @@ package com.example.mpacoursework;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,10 +18,14 @@ import java.util.List;
 
 public class cookActivityMain extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
+    final static String extraName = "RecipeName";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cook_main);
+
+        final Intent intent = new Intent(cookActivityMain.this,RecipeViewActivity.class);
+
         
         ListView listView = findViewById(R.id.cookSearchBar);
         List<String> cookList = new ArrayList<>();
@@ -34,6 +39,9 @@ public class cookActivityMain extends AppCompatActivity {
                                 "position: " + String.valueOf(position) + "\n" +
                                 "id: " + String.valueOf(id),
                         Toast.LENGTH_LONG).show();
+                String name = (String) parent.getItemAtPosition(position);
+                intent.putExtra("RecipeName", name);
+                startActivity(intent);
             }
         });
         //prototype, change later
@@ -43,6 +51,8 @@ public class cookActivityMain extends AppCompatActivity {
 
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1 , cookList);
         listView.setAdapter(arrayAdapter);
+
+
 
     }
 
