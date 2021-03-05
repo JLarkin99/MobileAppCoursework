@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomNavBar"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/dx3sbtbwoaeto5s"
+    android:layoutMode="clipBounds"
     tools:context=".PlayActivityMain">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -8,9 +8,16 @@
     tools:context=".cookActivityMain">
 
     <ListView
+        android:id="@+id/storedRecipeListView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cookSearchBar">
+        android:layout_height="350dp">
+
+    </ListView>
+
+    <ListView
+    android:id="@+id/webRecipeListView"
+    android:layout_width="wrap_content"
+    android:layout_height="350dp">
 
     </ListView>
 
