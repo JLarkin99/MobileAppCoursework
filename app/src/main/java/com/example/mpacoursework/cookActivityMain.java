@@ -21,74 +21,33 @@ import java.util.Map;
 public class cookActivityMain extends AppCompatActivity {
     ArrayAdapter<String> storedArrayAdapter;
     ArrayAdapter<String> webArrayAdapter;
-    final Map<String, String> webRecipes = new HashMap<String, String>();
+    private FragmentRefreshListener fragmentRefreshListener;
+
+
     final static String extraName = "RecipeName";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cook_main);
 
-        final Intent storedRecipeIntent = new Intent(cookActivityMain.this,RecipeViewActivity.class);
-        final Intent webRecipeIntent = new Intent(cookActivityMain.this,WebRecipeView.class);
-
-        
-        ListView storedListView = findViewById(R.id.storedRecipeListView);
-        ListView webListView = findViewById(R.id.webRecipeListView);
-        List<String> storedRecipeList = new ArrayList<>();
-        List<String> webRecipeList = new ArrayList<>();
-        //Map<String, String> webRecipes = new HashMap<String, String>();
-
-        storedListView.setClickable(true);
-        storedListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // When clicked perform some action...
-                Toast.makeText(cookActivityMain.this,"ListView: " + parent.toString() + "\n" +
-                                "View: " + view.toString() + "\n" +
-                                "position: " + String.valueOf(position) + "\n" +
-                                "id: " + String.valueOf(id),
-                        Toast.LENGTH_LONG).show();
-                String name = (String) parent.getItemAtPosition(position);
-                storedRecipeIntent.putExtra("RecipeName", name);
-                startActivity(storedRecipeIntent);
-            }
-        });
-
-        webListView.setClickable(true);
-        webListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // When clicked perform some action...
-                Toast.makeText(cookActivityMain.this,"ListView: " + parent.toString() + "\n" +
-                                "View: " + view.toString() + "\n" +
-                                "position: " + String.valueOf(position) + "\n" +
-                                "id: " + String.valueOf(id),
-                        Toast.LENGTH_LONG).show();
-                String name = (String) parent.getItemAtPosition(position);
-                storedRecipeIntent.putExtra("RecipeName", webRecipes.get(name));
-                startActivity(storedRecipeIntent);
-            }
-        });
-        //prototype, change later
-        storedRecipeList.add("Spaghetti");
-        storedRecipeList.add("burger");
-        storedRecipeList.add("Crumbs");
-        //web recipe names and links
-        webRecipes.put("Brownies","https://www.bbcgoodfood.com/recipes/vegan-brownies");
-        webRecipes.put("Lasagne","https://www.bbcgoodfood.com/recipes/next-level-lasagne");
-
-        //add map keys o list to be displayed
-        for(String key: webRecipes.keySet()){
-            webRecipeList.add(key);
-        }
-
-        storedArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1 , storedRecipeList);
-        storedListView.setAdapter(storedArrayAdapter);
-
-        webArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1 , webRecipeList);
-        storedListView.setAdapter(webArrayAdapter);
 
 
+
+
+
+
+
+    }
+    public FragmentRefreshListener getFragmentRefreshListener() {
+        return fragmentRefreshListener;
+    }
+
+    public void setFragmentRefreshListener(FragmentRefreshListener fragmentRefreshListener) {
+        this.fragmentRefreshListener = fragmentRefreshListener;
+    }
+
+    public interface FragmentRefreshListener{
+        void onRefresh(String newText);
     }
 
     @Override
@@ -106,7 +65,12 @@ public class cookActivityMain extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                storedArrayAdapter.getFilter().filter(newText);
+
+                if(getFragmentRefreshListener()!= null){
+                    getFragmentRefreshListener().onRefresh(newText);
+                }
+
+                //storedArrayAdapter.getFilter().filter(newText);
                 return false;
             }
         });
