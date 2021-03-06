@@ -35,6 +35,12 @@ public class SignUpActivity extends AppCompatActivity {
                 createAccount();
             }
         });
+        signInButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                signIn();
+            }
+        });
+
     }
 
     @Override

@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomNavBar"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="bottom"
     android:background="@drawable/dx3sbtbwoaeto5s"
     android:layoutMode="clipBounds"
-    tools:context=".PlayActivityMain">
+    tools:context=".PlayActivityMain"
+    tools:layout_editor_absoluteY="675dp">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="0dp"
+        app:flow_verticalAlign="bottom"
         app:itemBackground="@color/colorBlueDark"
         app:itemIconTint="@color/colorYellowDark"
         app:itemTextColor="@color/colorYellowDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/playnavigation" />
-</RelativeLayout>
+    <!--        tools:layout_editor_absoluteX="-16dp"-->
+    />
+</androidx.constraintlayout.widget.ConstraintLayout>

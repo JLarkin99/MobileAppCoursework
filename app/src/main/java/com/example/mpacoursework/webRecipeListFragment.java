@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,7 @@ public class webRecipeListFragment extends Fragment {
         //add map keys o list to be displayed
         for(String key: webRecipes.keySet()){
             webRecipeList.add(key);
+            Log.d("current key:",key);
         }
 
         webArrayAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_list_item_1 , webRecipeList);
