@@ -2,7 +2,10 @@ package com.example.mpacoursework;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -33,6 +36,11 @@ public class PlayActivityMain extends AppCompatActivity {
                             startActivity(intent);
                         case R.id.feedButton:
                             //create feed fragment
+                            FragmentManager fm = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                            feedFragment fm2 = new feedFragment();
+                            fragmentTransaction.add(R.id.fragFrame, fm2, "HELLO");
+                            fragmentTransaction.commit();
                     }
 
                     return true;

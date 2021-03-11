@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     ImageButton playButton;
     ImageButton cookButton;
+    TextView idTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(cookIntent);
             }
         });
+        idTextView = (TextView) findViewById(R.id.idText);
 
 
 
@@ -61,5 +64,16 @@ public class MainActivity extends AppCompatActivity {
             Intent signUpIntent = new Intent(MainActivity.this,SignUpActivity.class);
             startActivity(signUpIntent);
         }
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userEmail = user.getEmail();
+
+        idTextView.setText("Logged in as " + userEmail);
+    }
+
+    private String makeUsernameFromEmail(String Email){
+        String username = Email;
+        username.replaceAll("[^a-zA-Z0-9]","");
+        return username;
     }
 }
