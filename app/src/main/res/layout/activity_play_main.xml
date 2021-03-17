@@ -12,6 +12,40 @@
     tools:context=".PlayActivityMain"
     tools:layout_editor_absoluteY="675dp">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="400dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/munchlax" />
+
+    <TextView
+        android:id="@+id/nameText"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:fontFamily="@font/eightbitoperator"
+        android:text="Default"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hungerText"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/eightbitoperator"
+        android:text="Hunger: 100/100"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nameText"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="wrap_content"

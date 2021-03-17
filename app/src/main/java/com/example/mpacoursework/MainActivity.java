@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     ImageButton playButton;
     ImageButton cookButton;
+    Button signOutButton;
     TextView idTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
         cookButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivity(cookIntent);
+            }
+        });
+        signOutButton = findViewById(R.id.signOutButton);
+        signOutButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                mAuth.signOut();
+                Intent signUpIntent = new Intent(MainActivity.this,SignUpActivity.class);
+                startActivity(signUpIntent);
             }
         });
         idTextView = (TextView) findViewById(R.id.idText);

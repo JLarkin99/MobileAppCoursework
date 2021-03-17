@@ -61,6 +61,15 @@ public class feedFragment extends Fragment {
         email = makeUsernameFromEmail(userEmail);;
         final DatabaseReference ref = database.getReference("users");
         userFoodList = new ArrayList<>();
+        cards = new ArrayList<>();
+
+        mRecyclerView = getView().findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+        adapter = new feedAdapter(cards);
+
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(adapter);
 
 
         ref.child("users").child(email).child("foodlist").addValueEventListener(new ValueEventListener() {
@@ -72,6 +81,16 @@ public class feedFragment extends Fragment {
                 GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {};
 
                 userFoodList = dataSnapshot.getValue(t);
+                if(userFoodList != null) {
+                    Log.i("FF","user foodlist triggered from DSS");
+                    cards.clear();
+                    for (String word : userFoodList) {
+                        Log.i("FF",word);
+                        cards.add(new cardViewContents(R.drawable.fastfood_24px, word));
+                        //adapter.notifyItemInserted(userFoodList.indexOf(word));
+                    }
+                    updateRecyclerView();
+                }
             }
 
             @Override
@@ -81,21 +100,19 @@ public class feedFragment extends Fragment {
             }
         });
 
-        cards = new ArrayList<>();
 
-        if(userFoodList != null) {
-            for (String word : userFoodList) {
-                cards.add(new cardViewContents(R.drawable.fastfood_24px, word));
-            }
-        }
 
-        mRecyclerView = getView().findViewById(R.id.recyclerView);
-        mRecyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new feedAdapter(cards);
+//        if(userFoodList != null) {
+//            for (String word : userFoodList) {
+//                cards.add(new cardViewContents(R.drawable.fastfood_24px, word));
+//            }
+//        }
 
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(adapter);
+//        cards.add(new cardViewContents(R.drawable.fastfood_24px, "test"));
+//        cards.add(new cardViewContents(R.drawable.fastfood_24px, "test"));
+
+
+
 
 
         //ArrayList<String> userFoodList = new ArrayList<String>();
@@ -111,6 +128,9 @@ public class feedFragment extends Fragment {
                 String foodName = cards.get(position).getText();
                 if (userFoodList != null){
                     userFoodList.remove(position);
+                    //adapter.notifyDataSetChanged();
+                    //updateRecyclerView();
+                    adapter.notifyItemRangeRemoved(position,userFoodList.size());
                     //update database with new list
                     ref.child("users").child(email).child("foodlist").setValue(userFoodList);
                 }
@@ -130,6 +150,12 @@ public class feedFragment extends Fragment {
         username = username.replace(".","");
         Log.i("Tag", username);
         return username;
+    }
+
+    private void updateRecyclerView(){
+        if(mRecyclerView != null){
+            adapter.notifyDataSetChanged();
+        }
     }
 
 }
