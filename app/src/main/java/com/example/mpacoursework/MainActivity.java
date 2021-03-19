@@ -1,20 +1,14 @@
 package com.example.mpacoursework;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -40,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        cookButton = (ImageButton) findViewById(R.id.cookButton);
+        cookButton = (ImageButton) findViewById(R.id.exitButton);
         cookButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivity(cookIntent);
@@ -75,9 +69,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String userEmail = user.getEmail();
 
-        idTextView.setText("Logged in as " + userEmail);
+
+
+        if (user != null) {
+            String userEmail = user.getEmail();
+            idTextView.setText("Logged in as " + userEmail);
+        }
+        else{
+            idTextView.setText("Not Logged in!");
+        }
     }
 
     private String makeUsernameFromEmail(String Email){

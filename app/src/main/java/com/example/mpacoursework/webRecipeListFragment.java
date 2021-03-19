@@ -60,7 +60,7 @@ public class webRecipeListFragment extends Fragment {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userEmail = user.getEmail();
-        email = makeUsernameFromEmail(userEmail);;
+        email = makeUsernameFromEmail(userEmail);
         userFoodList = new ArrayList<>();
         final DatabaseReference ref = database.getReference("users");
 

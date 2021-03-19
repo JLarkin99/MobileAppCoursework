@@ -11,22 +11,22 @@
         android:id="@+id/recipeTextView"
         android:layout_width="414dp"
         android:layout_height="542dp"
-        android:fontFamily="casual"
-        android:shadowColor="#000000"
+        android:fontFamily="sans-serif"
 
-        android:shadowDx="1.5"
-        android:shadowDy="1.3"
+        android:padding="10dp"
+        android:scrollbars="horizontal|vertical"
+        android:shadowColor="@color/colorBlueDark"
+        android:shadowDx="2.5"
+        android:shadowDy="2.5"
         android:shadowRadius="2.0"
         android:text=""
-        android:textAllCaps="true"
-        android:textColor="@android:color/white"
-        android:scrollbars = "vertical"
 
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlueLight"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.354" />
+        tools:text="Test" />
 </androidx.constraintlayout.widget.ConstraintLayout>

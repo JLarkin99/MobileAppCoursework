@@ -2,12 +2,13 @@ package com.example.mpacoursework;
 
 public class Pet {
 
-    private static final int MAX_HUNGER = 100;
-    private int hunger;
+    public static final int MAX_HUNGER = 100;
+    private final int FEED_INCREMENT = 20;
+    private int hunger = MAX_HUNGER;
     private String name;
 
     public Pet(){
-        setHunger(MAX_HUNGER);
+        //setHunger(MAX_HUNGER);
 
     }
 
@@ -34,6 +35,13 @@ public class Pet {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void feedPet(){
+        hunger += FEED_INCREMENT;
+        if(hunger > MAX_HUNGER){
+            hunger = MAX_HUNGER;
+        }
     }
 
 

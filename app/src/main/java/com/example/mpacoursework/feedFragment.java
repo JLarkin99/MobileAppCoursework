@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +34,7 @@ public class feedFragment extends Fragment {
     private ArrayList<String> foodList;
     ArrayList<String> userFoodList;
     String email;
+    ImageButton exitButton;
 
 
 
@@ -71,6 +73,14 @@ public class feedFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(adapter);
 
+        exitButton = (ImageButton) getActivity().findViewById(R.id.exitButton);
+        exitButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Log.i("OCL","click on exitbutton detected");
+                closeFragment();
+            }
+        });
+
 
         ref.child("users").child(email).child("foodlist").addValueEventListener(new ValueEventListener() {
             @Override
@@ -102,11 +112,11 @@ public class feedFragment extends Fragment {
 
 
 
-//        if(userFoodList != null) {
-//            for (String word : userFoodList) {
-//                cards.add(new cardViewContents(R.drawable.fastfood_24px, word));
-//            }
-//        }
+        if(userFoodList != null) {
+            for (String word : userFoodList) {
+                cards.add(new cardViewContents(R.drawable.fastfood_24px, word));
+            }
+        }
 
 //        cards.add(new cardViewContents(R.drawable.fastfood_24px, "test"));
 //        cards.add(new cardViewContents(R.drawable.fastfood_24px, "test"));
@@ -133,6 +143,9 @@ public class feedFragment extends Fragment {
                     adapter.notifyItemRangeRemoved(position,userFoodList.size());
                     //update database with new list
                     ref.child("users").child(email).child("foodlist").setValue(userFoodList);
+
+                    closeFragment(foodName);
+
                 }
             }
         });
@@ -158,4 +171,18 @@ public class feedFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+
+    }
+
+    public void closeFragment(){
+        ((PlayActivityMain)getActivity()).getFeedListener().onFragmentExit();
+    }
+
+    public void closeFragment(String itemName){
+        ((PlayActivityMain)getActivity()).getFeedListener().onFragmentItemSelected(itemName);
+    }
 }

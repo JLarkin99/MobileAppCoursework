@@ -45,7 +45,7 @@
         app:layout_constraintVertical_bias="0.092" />
 
     <ImageButton
-        android:id="@+id/cookButton"
+        android:id="@+id/exitButton"
         style="@style/Widget.AppCompat.ImageButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
