@@ -11,7 +11,7 @@
         android:id="@+id/recipeTextView"
         android:layout_width="414dp"
         android:layout_height="542dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/eightbit"
 
         android:padding="10dp"
         android:scrollbars="horizontal|vertical"
@@ -29,4 +29,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Test" />
+    <ImageButton
+        android:id="@+id/recipeBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorBlueDark"
+        android:tint="@color/colorYellowDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/arrow_back_24px" />
 </androidx.constraintlayout.widget.ConstraintLayout>

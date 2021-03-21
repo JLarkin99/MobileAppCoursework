@@ -4,6 +4,7 @@ public class Pet {
 
     public static final int MAX_HUNGER = 100;
     private final int FEED_INCREMENT = 20;
+    private final int HUNGER_STEP = 20;
     private int hunger = MAX_HUNGER;
     private String name;
 
@@ -41,6 +42,13 @@ public class Pet {
         hunger += FEED_INCREMENT;
         if(hunger > MAX_HUNGER){
             hunger = MAX_HUNGER;
+        }
+    }
+
+    public void depleteHunger(){
+        hunger -= HUNGER_STEP;
+        if (hunger < 0){
+            hunger = 0;
         }
     }
 

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        cookButton = (ImageButton) findViewById(R.id.exitButton);
+        cookButton = (ImageButton) findViewById(R.id.exitButtonSettings);
         cookButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivity(cookIntent);

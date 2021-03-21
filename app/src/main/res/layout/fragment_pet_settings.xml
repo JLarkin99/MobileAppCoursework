@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentTop="false"
+    android:layout_centerInParent="false"
+    android:textAlignment="center">
+
+
+    <LinearLayout
+        android:layout_width="251dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="90dp"
+        android:layout_marginTop="109dp"
+        android:background="@color/colorBlueDark"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/promptText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/eightbit"
+            android:gravity="center"
+            android:maxEms="8"
+            android:minLines="1"
+            android:text="Name Your Pet!"
+            android:textColor="@color/colorYellowDark"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/editNameBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:maxEms="8"
+            android:minEms="1"
+            android:text="Name"
+            android:textAllCaps="false"
+            android:textColor="@color/colorYellowLight"
+            android:textColorHint="@color/colorBlueDark"
+            android:textColorLink="@color/colorYellowLight"
+            android:fontFamily="@font/eightbit"
+            android:maxLength="8"/>
+
+        <Button
+            android:id="@+id/confirmButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlueLight"
+            android:text="Confirm"
+            android:textColor="@color/colorYellowDark"
+            android:fontFamily="@font/eightbit"/>
+
+        <ImageButton
+            android:id="@+id/exitButtonSettings"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="20dp"
+            android:background="#00673AB7"
+            android:contentDescription=""
+            android:scaleType="centerCrop"
+            android:tint="#FFF48F"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/clear_24px" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

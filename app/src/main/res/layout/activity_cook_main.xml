@@ -9,6 +9,19 @@
     tools:context=".cookActivityMain">
 
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="356dp"
+        android:fontFamily="@font/eightbit"
+        android:text="Web Recipes"
+        android:textColor="@color/colorBlueLight"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <fragment
         android:id="@+id/fragment"
         android:name="com.example.mpacoursework.storedRecipeListFragment"
@@ -35,4 +48,41 @@
         app:layout_constraintTop_toBottomOf="@+id/fragment"
         app:layout_constraintVertical_bias="0.19999999"
         tools:layout="@layout/fragment_web_recipe_list" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/playNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:flow_verticalAlign="baseline"
+        app:itemBackground="@color/colorBlueDark"
+        app:itemIconTint="@color/colorYellowDark"
+        app:itemTextColor="@color/colorYellowDark"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/cooknavigation" />
+
+    <SearchView
+        android:id="@+id/mSearchView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@color/colorBlueLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="275dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
+        android:fontFamily="@font/eightbit"
+        android:text="In-App Recipes"
+        android:textColor="@color/colorBlueLight"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

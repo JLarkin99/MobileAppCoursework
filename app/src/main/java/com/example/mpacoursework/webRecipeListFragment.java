@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,7 +30,7 @@ import java.util.Map;
 
 public class webRecipeListFragment extends Fragment {
 
-    ArrayAdapter<String> webArrayAdapter;
+    ArrayAdapter<String> mArrayAdapter;
     ArrayList<String> userFoodList;
     String email;
     final Map<String, String> webRecipes = new HashMap<String, String>();
@@ -105,6 +104,10 @@ public class webRecipeListFragment extends Fragment {
         //web recipe names and links
         webRecipes.put("Brownies","https://www.bbcgoodfood.com/recipes/vegan-brownies");
         webRecipes.put("Lasagne","https://www.bbcgoodfood.com/recipes/next-level-lasagne");
+        webRecipes.put("Mushroom Potato Soup","https://www.bbcgoodfood.com/recipes/mushroom-potato-soup");
+        webRecipes.put("Greek Roast Lamb","https://www.bbcgoodfood.com/recipes/greek-roast-lamb");
+        webRecipes.put("Chorizo Risotto", "https://www.bbcgoodfood.com/recipes/chorizo-rosemary-pearl-barley-risotto");
+        webRecipes.put("Salmon Traybake", "https://www.bbcgoodfood.com/recipes/creamy-salmon-leek-potato-traybake");
 
         //add map keys o list to be displayed
         for(String key: webRecipes.keySet()){
@@ -112,19 +115,19 @@ public class webRecipeListFragment extends Fragment {
             Log.d("current key:",key);
         }
 
-        webArrayAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_list_item_1 , webRecipeList);
-        webListView.setAdapter(webArrayAdapter);
+        mArrayAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_list_item_1 , webRecipeList);
+        webListView.setAdapter(mArrayAdapter);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ((cookActivityMain)getActivity()).setFragmentRefreshListener(new cookActivityMain.FragmentRefreshListener() {
+        ((cookActivityMain)getActivity()).setWebFragmentRefreshListener(new cookActivityMain.WebFragmentRefreshListener() {
             @Override
             public void onRefresh(String newText) {
                 // your method
 
-                webArrayAdapter.getFilter().filter(newText);
+                mArrayAdapter.getFilter().filter(newText);
             }
         });
 

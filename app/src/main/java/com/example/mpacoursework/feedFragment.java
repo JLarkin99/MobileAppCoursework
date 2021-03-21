@@ -73,7 +73,7 @@ public class feedFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(adapter);
 
-        exitButton = (ImageButton) getActivity().findViewById(R.id.exitButton);
+        exitButton = (ImageButton) getActivity().findViewById(R.id.exitButtonSettings);
         exitButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Log.i("OCL","click on exitbutton detected");
@@ -183,6 +183,6 @@ public class feedFragment extends Fragment {
     }
 
     public void closeFragment(String itemName){
-        ((PlayActivityMain)getActivity()).getFeedListener().onFragmentItemSelected(itemName);
+        ((PlayActivityMain)getActivity()).getFeedListener().onFragmentFoodSelected(itemName);
     }
 }

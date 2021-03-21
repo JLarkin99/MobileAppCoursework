@@ -4,13 +4,17 @@
     <item
         android:id="@+id/backButton"
         android:icon="@drawable/arrow_back_24px"
-        android:title="back"/>
+        android:title="Back"/>
+
     <item
         android:id="@+id/feedButton"
         android:icon="@drawable/fastfood_24px"
-        android:title="feed"/>
+        android:title="Feed"/>
+
+
+
     <item
-        android:id="@+id/dummy"
-        android:icon="@drawable/check_24px"
-        android:title="dummy"/>
+        android:id="@+id/Settings"
+        android:icon="@drawable/menu_24px"
+        android:title="Settings" />
 </menu>

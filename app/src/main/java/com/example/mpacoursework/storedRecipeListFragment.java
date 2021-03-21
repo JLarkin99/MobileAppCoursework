@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -15,10 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +29,7 @@ import java.util.List;
 
 
 public class storedRecipeListFragment extends Fragment {
-    ArrayAdapter<String> storedArrayAdapter;
+    ArrayAdapter<String> mArrayAdapter;
     Activity a;
     ArrayList<String> userFoodList;
     String email;
@@ -102,8 +98,12 @@ public class storedRecipeListFragment extends Fragment {
         List<String> storedRecipeList = new ArrayList<>();
 
         storedRecipeList.add("Spaghetti");
-        storedRecipeList.add("burger");
-        storedRecipeList.add("Crumbs");
+        storedRecipeList.add("Burgers");
+        storedRecipeList.add("Cookies");
+        storedRecipeList.add("Fruit Salad");
+        storedRecipeList.add("Scotch Broth");
+        storedRecipeList.add("Irish Stew");
+
 
         storedListView.setClickable(true);
         storedListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -125,7 +125,7 @@ public class storedRecipeListFragment extends Fragment {
 
 
                 //start intent
-                storedRecipeIntent.putExtra("RecipeName", name);
+                storedRecipeIntent.putExtra("RecipeName", name.replace(" ",""));
                 startActivity(storedRecipeIntent);
             }
         });
@@ -133,8 +133,8 @@ public class storedRecipeListFragment extends Fragment {
 
 
         //creates null object reference?
-        storedArrayAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_list_item_1 , storedRecipeList);
-        storedListView.setAdapter(storedArrayAdapter);
+        mArrayAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_list_item_1 , storedRecipeList);
+        storedListView.setAdapter(mArrayAdapter);
 
     }
 
@@ -147,7 +147,7 @@ public class storedRecipeListFragment extends Fragment {
             public void onRefresh(String newText) {
                 // your method
 
-                storedArrayAdapter.getFilter().filter(newText);
+                mArrayAdapter.getFilter().filter(newText);
             }
         });
 

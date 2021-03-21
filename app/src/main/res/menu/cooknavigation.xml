@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/backButton"
+        android:icon="@drawable/arrow_back_24px"
+        android:title="Back"/>
+
+    <item
+        android:id="@+id/Timer"
+        android:icon="@android:drawable/ic_lock_idle_alarm"
+        android:title="Timer" />
+
+    <item
+        android:id="@+id/Dummy"
+        android:checkable="false"
+        android:icon="@drawable/munchlax3d"
+        android:title="" />
+</menu>

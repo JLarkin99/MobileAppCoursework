@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorYellowLight"
+    tools:context=".TimerActivity">
+
+    <TextView
+        android:id="@+id/TimerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/eightbit"
+        android:text="00:00"
+        android:textColor="@color/colorBlueDark"
+        android:textSize="100sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.168" />
+
+    <ImageButton
+        android:id="@+id/upMinTen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:background="#00673AB7"
+        android:scaleX="5"
+        android:scaleY="5"
+        android:tint="@color/colorBlueLight"
+        app:layout_constraintBottom_toTopOf="@+id/TimerText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/arrow_drop_up_24px" />
+
+    <ImageButton
+        android:id="@+id/upMinOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:background="#00673AB7"
+        android:scaleX="5"
+        android:scaleY="5"
+        android:tint="@color/colorBlueLight"
+        app:layout_constraintBottom_toTopOf="@+id/TimerText"
+        app:layout_constraintStart_toEndOf="@+id/upMinTen"
+        app:srcCompat="@drawable/arrow_drop_up_24px" />
+
+    <ImageButton
+        android:id="@+id/upSecTen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:background="#00673AB7"
+        android:scaleX="5"
+        android:scaleY="5"
+        android:tint="@color/colorBlueLight"
+        app:layout_constraintBottom_toTopOf="@+id/TimerText"
+        app:layout_constraintStart_toEndOf="@+id/upMinOne"
+        app:srcCompat="@drawable/arrow_drop_up_24px" />
+
+    <ImageButton
+        android:id="@+id/upSecOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:background="#00673AB7"
+        android:scaleX="5"
+        android:scaleY="5"
+        android:tint="@color/colorBlueLight"
+        app:layout_constraintBottom_toTopOf="@+id/TimerText"
+        app:layout_constraintStart_toEndOf="@+id/upSecTen"
+        app:srcCompat="@drawable/arrow_drop_up_24px" />
+
+    <ImageButton
+        android:id="@+id/downMinTen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="12dp"
+        android:background="#00673AB7"
+        android:scaleX="5"
+        android:scaleY="5"
+        android:tint="@color/colorBlueLight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TimerText"
+        app:srcCompat="@drawable/arrow_drop_down_24px" />
+
+    <ImageButton
+        android:id="@+id/downMinOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="12dp"
+        android:background="#00673AB7"
+        android:scaleX="5"
+        android:scaleY="5"
+        android:tint="@color/colorBlueLight"
+        app:layout_constraintStart_toEndOf="@+id/downMinTen"
+        app:layout_constraintTop_toBottomOf="@+id/TimerText"
+        app:srcCompat="@drawable/arrow_drop_down_24px" />
+
+    <ImageButton
+        android:id="@+id/downSecTen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="12dp"
+        android:background="#00673AB7"
+        android:scaleX="5"
+        android:scaleY="5"
+        android:tint="@color/colorBlueLight"
+        app:layout_constraintStart_toEndOf="@+id/downMinOne"
+        app:layout_constraintTop_toBottomOf="@+id/TimerText"
+        app:srcCompat="@drawable/arrow_drop_down_24px" />
+
+    <ImageButton
+        android:id="@+id/downSecOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="12dp"
+        android:background="#00673AB7"
+        android:scaleX="5"
+        android:scaleY="5"
+        android:tint="@color/colorBlueLight"
+        app:layout_constraintStart_toEndOf="@+id/downSecTen"
+        app:layout_constraintTop_toBottomOf="@+id/TimerText"
+        app:srcCompat="@drawable/arrow_drop_down_24px" />
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="188dp"
+        android:background="@color/colorBlueLight"
+        android:fontFamily="@font/eightbit"
+        android:text="Start"
+        android:textColor="@color/colorYellowDark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TimerText" />
+
+    <Button
+        android:id="@+id/stopButton"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="188dp"
+        android:layout_marginEnd="56dp"
+        android:background="@color/colorBlueLight"
+        android:fontFamily="@font/eightbit"
+        android:text="Stop"
+        android:textColor="@color/colorYellowDark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TimerText" />
+
+    <ImageButton
+        android:id="@+id/timerBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorBlueDark"
+        android:tint="@color/colorYellowDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/arrow_back_24px" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,12 +2,12 @@ package com.example.mpacoursework;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -22,14 +22,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-
 public class PlayActivityMain extends AppCompatActivity {
     Intent intent;
     Pet userPet;
-    String email;
     TextView nameText;
     TextView hungerText;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String userEmail = user.getEmail();
+    String email = makeUsernameFromEmail(userEmail);
+    final DatabaseReference ref = database.getReference("users");
+    final int TIMER_LENGTH = 20000;
 
     public Pet getUserPet() {
         return userPet;
@@ -47,12 +50,21 @@ public class PlayActivityMain extends AppCompatActivity {
         }
 
         @Override
-        public void onFragmentItemSelected(String itemName) {
+        public void onFragmentNameSelected(String itemName) {
 
         }
+
+        @Override
+        public void onFragmentFoodSelected(String name) {
+
+        }
+
+
     };
     private FragmentManager fm = getFragmentManager();
     final feedFragment fm2 = new feedFragment();
+    final PetSettingsFragment settingsFragment = new PetSettingsFragment();
+    final foodPromptFragment promptFragment = new foodPromptFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +72,8 @@ public class PlayActivityMain extends AppCompatActivity {
         setContentView(R.layout.activity_play_main);
 
         intent = new Intent(PlayActivityMain.this, MainActivity.class);
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String userEmail = user.getEmail();
-        email = makeUsernameFromEmail(userEmail);
-        final DatabaseReference ref = database.getReference("users");
+
+
         nameText = findViewById(R.id.nameText);
         hungerText = findViewById(R.id.hungerText);
 
@@ -82,16 +91,15 @@ public class PlayActivityMain extends AppCompatActivity {
                     Log.i("UPN", getUserPet().getName());
                     if(userPet != null){
                         Log.i("UPN","user pet is not null");
-                        nameText.setText(userPet.getName());
+                        updateUI();
                     }
-                    if(userPet != null){
-                        String hungerString = "Hunger: " + userPet.getHunger() + "/" + Pet.MAX_HUNGER;
-                        hungerText.setText(hungerString);
-                    }
+
                 }
                 else{
                     userPet = new Pet(100,"Steve");
                     ref.child("users").child(email).child("userpet").setValue(userPet);
+                    launchSettingsFragment();
+
                 }
             }
 
@@ -106,7 +114,7 @@ public class PlayActivityMain extends AppCompatActivity {
 
         //userPet = new Pet();
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
+        BottomNavigationView bottomNav = findViewById(R.id.playNavigationView);
         bottomNav.setOnNavigationItemSelectedListener(navSelectListener);
 
 
@@ -118,39 +126,32 @@ public class PlayActivityMain extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item){
                     //return false;
-
+                    //FragmentTransaction fragmentTransaction = fm.beginTransaction();
                     switch(item.getItemId()){
                         case R.id.backButton:
+                            item.setCheckable(true);
+                            Log.i("NSI", "back button selected");
                             startActivity(intent);
+                            return true;
                         case R.id.feedButton:
-                            //create feed fragment
-
-                            FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                            fragmentTransaction.add(R.id.fragFrame, fm2, "HELLO");
-                            fragmentTransaction.commit();
-                            if (getFeedListener() != null){
-                                setFeedListenerListener(new FeedListener() {
-                                    @Override
-                                    public void onFragmentExit() {
-                                        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                                        fragmentTransaction.remove(fm2).commit();
-                                        Log.i("OFE", "onFragmentExit triggered");
-                                    }
-
-                                    @Override
-                                    public void onFragmentItemSelected(String itemName) {
-                                        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                                        fragmentTransaction.remove(fm2).commit();
-
-                                        getUserPet().feedPet();
-
-
-                                    }
-                                });
+                            if(R.id.feedButton == R.id.Settings){
+                                Log.i("AAA","UUUUUH");
                             }
+                            item.setCheckable(true);
+                            Log.i("NSI", "feed button selected");
+                            launchFeedFragment();
+                            return true;
+
+                        case R.id.Settings:
+                            item.setCheckable(true);
+                            Log.i("NSI", "settings button selected");
+                            launchSettingsFragment();
+                            return true;
+
+
                     }
 
-                    return true;
+                    return false;
                 }
             };
 
@@ -158,7 +159,9 @@ public class PlayActivityMain extends AppCompatActivity {
 
         void onFragmentExit();
 
-        void onFragmentItemSelected(String itemName);
+        void onFragmentNameSelected(String itemName);
+
+        void onFragmentFoodSelected(String name);
     }
     public FeedListener getFeedListener() {
         return feedListener;
@@ -178,8 +181,135 @@ public class PlayActivityMain extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        //startHunger
+        recursiveCountdown();
+
+
+    }
+
+
+    void launchFeedFragment(){
+        //create feed fragment
+        //final FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        //fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.fragFrame, fm2, "oh wow");
+        fragmentTransaction.commit();
+        if (getFeedListener() != null){
+            setFeedListenerListener(new FeedListener() {
+                @Override
+                public void onFragmentExit() {
+                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                    fragmentTransaction.remove(fm2).commit();
+                    //fm.popBackStack();
+                    Log.i("OFE", "onFragmentExit triggered");
+                }
+
+                @Override
+                public void onFragmentNameSelected(String itemName) {
 
 
 
+                }
+                @Override
+                public void onFragmentFoodSelected(String name) {
+                                        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                                        fragmentTransaction.remove(fm2).commit();
+                    getUserPet().feedPet();
+                    updateUI();
+                    fm.popBackStack();
+                    launchPromptFragment(name);
+
+                }
+            });
+        }
+    }
+
+    void launchPromptFragment(String foodName){
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        //fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.fragFrame, promptFragment, "oh wow");
+        fragmentTransaction.commit();
+        if (getFeedListener() != null){
+            setFeedListenerListener(new FeedListener() {
+                @Override
+                public void onFragmentExit() {
+                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                    fragmentTransaction.remove(promptFragment).commit();
+                    //fm.popBackStack();
+                    Log.i("OFE", "onFragmentExit triggered");
+                }
+
+                @Override
+                public void onFragmentNameSelected(String itemName) {
+
+
+
+                }
+                @Override
+                public void onFragmentFoodSelected(String name) {
+
+
+                }
+            });
+        }
+    }
+
+    void launchSettingsFragment(){
+        //final FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        //fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.fragFrame, settingsFragment, "HELLO");
+        fragmentTransaction.commit();
+        if (getFeedListener() != null){
+            setFeedListenerListener(new FeedListener() {
+                @Override
+                public void onFragmentExit() {
+                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                    fragmentTransaction.remove(settingsFragment).commit();
+                    fm.popBackStack();
+                    Log.i("OFE", "onFragmentExit triggered");
+                }
+
+                @Override
+                public void onFragmentNameSelected(String itemName) {
+                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                    fragmentTransaction.remove(settingsFragment).commit();
+                    //fm.popBackStack();
+                    getUserPet().setName(itemName);
+                    ref.child("users").child(email).child("userpet").setValue(userPet);
+                    updateUI();
+
+                }
+
+                @Override
+                public void onFragmentFoodSelected(String name) {
+
+                }
+            });
+        }
+    }
+
+    void updateUI(){
+        if(userPet != null && hungerText != null && nameText != null){
+            nameText.setText(userPet.getName());
+            String hungerString = "Hunger: " + userPet.getHunger() + "/" + Pet.MAX_HUNGER;
+            hungerText.setText(hungerString);
+        }
+    }
+
+
+    void recursiveCountdown(){
+        new CountDownTimer(TIMER_LENGTH, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                userPet.depleteHunger();
+                updateUI();
+                recursiveCountdown();
+            }
+        }.start();
     }
 }
